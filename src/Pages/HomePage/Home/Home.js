@@ -1,5 +1,6 @@
 import React from 'react';
 import Footer from '../../Shared/Footer/Footer';
+import AllReviews from '../AllReviews/AllReviews';
 import Category from '../Category/Category';
 import HomePageBanner from '../HomePageBanner/HomePageBanner';
 
@@ -11,7 +12,7 @@ const Home = () => {
            <HomePageBanner></HomePageBanner>
             <Services></Services>
             <Category></Category>
-            
+            <AllReviews></AllReviews>
             <Footer></Footer> 
         </div>
     );

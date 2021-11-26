@@ -9,8 +9,8 @@ const MakeAdmin = () => {
     }
     const handleAdminSubmit = e => {
         e.preventDefault();
-        const user = {email};
-        fetch('https://shielded-caverns-45156.herokuapp.com/users/admin',{
+        const user = {email,isAdmin:false};
+        fetch('http://localhost:5000/users/admin',{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

@@ -6,36 +6,32 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
-const Order = () => {
+const AddedOrder = () => {
+    const [addedOrder,setAddedOrder] = useState({})
     let { orderId } = useParams();
-    const [serviceDetails, setServiceDetails] = useState({});
-
     useEffect(() => {
-        fetch(`https://shielded-caverns-45156.herokuapp.com/explore_item/${orderId}`)
+        fetch(`http://localhost:5000/${orderId}`)
             .then(res => res.json())
-            .then(result => setServiceDetails(result))
+            .then(result => console.log(result))
     }, [])
-
-
-
     return (
         <Container >
             <Card sx={{ maxWidth: 345,margin:"0 auto",pt:"15%" }}>
                 <CardMedia
                     component="img"
                     width="100%"
-                    image={serviceDetails?.img}
+                    image={addedOrder?.imageUrl}
                     
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {serviceDetails?.name}
+                        {addedOrder?.productName}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {serviceDetails?.description}
+                        {addedOrder?.productDescription}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Price:$ {serviceDetails?.price}
+                      Price:$ {addedOrder?.productPrice}
                     </Typography>
                     <Link to="/purchase"><Button variant="contained">Purchase Now</Button></Link>
                 </CardContent>
@@ -44,4 +40,4 @@ const Order = () => {
     );
 };
 
-export default Order;
+export default AddedOrder;

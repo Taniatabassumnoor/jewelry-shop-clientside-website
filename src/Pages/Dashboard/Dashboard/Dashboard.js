@@ -23,9 +23,9 @@ import {
     Link,
     useParams,
     useRouteMatch
-  } from "react-router-dom";
-import { Button } from '@mui/material';
-import DashboardHome from '../DashboardHome/DashboardHome';
+} from "react-router-dom";
+import { Button, Grid } from '@mui/material';
+// import DashboardHome from '../DashboardHome/DashboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddProduct from '../AddProduct/AddProduct';
 // import useFirebase from '../../../../Hooks/useFirebase';
@@ -33,10 +33,11 @@ import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 import useFirebase from '../../../Hooks/useFirebase';
 import ManageAllOrder from '../ManageAllOrder/ManageAllOrder';
 import ManageProduct from '../ManageProduct/ManageProduct';
-import Pay from '../Pay/Pay';
+// import Pay from '../Pay/Pay';
 import MyOrder from '../MyOrder/MyOrder';
 import Reviews from '../../HomePage/Reviews/Reviews';
 import ExploreHome from '../../ExplorePage/ExploreHome/ExploreHome';
+import UserDashboard from '../UserDashboard/UserDashboard';
 
 const drawerWidth = 240;
 
@@ -49,22 +50,22 @@ function Dashboard(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-    const {admin} = useFirebase()
+    const { admin } = useFirebase()
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
-            <Link to={`${url}/explore`}><Button color="inherit">Dashboard</Button></Link>
+            <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
             <Link to="/explore"><Button color="inherit">Explore</Button></Link>
-            <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link>
+            {/* <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link> */}
             <Link to={`${url}/myOrder`}><Button color="inherit">My Orders</Button></Link>
             <Link to={`${url}/reviews`}><Button color="inherit">Reviews</Button></Link>
             {
                 admin && <Box>
                     <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
-            <Link to={`${url}/addProduct`}><Button color="inherit">Add a Product</Button></Link>
-            <Link to={`${url}/manageAllOrder`}><Button color="inherit">Manage All Orders</Button></Link>
-            <Link to={`${url}/manageProduct`}><Button color="inherit">Manage Product</Button></Link>
+                    <Link to={`${url}/addProduct`}><Button color="inherit">Add a Product</Button></Link>
+                    <Link to={`${url}/manageAllOrder`}><Button color="inherit">Manage All Orders</Button></Link>
+                    <Link to={`${url}/manageProduct`}><Button color="inherit">Manage Product</Button></Link>
                 </Box>
             }
             <List>
@@ -138,45 +139,52 @@ function Dashboard(props) {
                 >
                     {drawer}
                 </Drawer>
+
             </Box>
             <Box
                 component="main"
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                
+
                 <Switch>
-        {/* <Route exact path={path}>
+                    {/* <Route exact path={path}>
           <DashboardHome></DashboardHome>
         </Route> */}
-        <Route exact path={`${path}/explore`}>
-          <ExploreHome></ExploreHome>
-        </Route>
-        <Route exact path={`${path}/pay`}>
-          <Pay></Pay>
-        </Route>
-        <Route exact path={`${path}/myOrder`}>
-          <MyOrder></MyOrder>
-        </Route>
-        <Route exact path={`${path}/reviews`}>
-         <Reviews></Reviews>
-        </Route>
-        
-        <AdminRoute path={`${path}/makeAdmin`}>
-          <MakeAdmin></MakeAdmin>
-        </AdminRoute>
-        <AdminRoute path={`${url}/addProduct`}>
-            <AddProduct></AddProduct>
-        </AdminRoute>
-        <AdminRoute path={`${url}/manageAllOrder`}>
-            <ManageAllOrder></ManageAllOrder>
-        </AdminRoute>
-        <AdminRoute path={`${url}/manageProduct`}>
-            <ManageProduct></ManageProduct>
-        </AdminRoute>
-       
-      </Switch>
-                
+                    <Route exact path={`${path}/explore`}>
+                        <ExploreHome></ExploreHome>
+                    </Route>
+                    {/* <Route exact path={`${path}/pay/:purchaseId`}>
+                        <Pay></Pay>
+                    </Route> */}
+                    <Route exact path={`${path}/myOrder`}>
+                        <MyOrder></MyOrder>
+                    </Route>
+                    <Route exact path={`${path}/reviews`}>
+                        <Reviews></Reviews>
+                    </Route>
+
+                    <AdminRoute path={`${path}/makeAdmin`}>
+                        <MakeAdmin></MakeAdmin>
+                    </AdminRoute>
+                    <AdminRoute path={`${url}/addProduct`}>
+                        <AddProduct></AddProduct>
+                    </AdminRoute>
+                    <AdminRoute path={`${url}/manageAllOrder`}>
+                        <ManageAllOrder></ManageAllOrder>
+                    </AdminRoute>
+                    <AdminRoute path={`${url}/manageProduct`}>
+                        <ManageProduct></ManageProduct>
+                    </AdminRoute>
+
+                </Switch>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={12}>
+                     <UserDashboard></UserDashboard>
+                    </Grid>
+                </Grid>
+
+
             </Box>
         </Box>
     );
