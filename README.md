@@ -8,3 +8,4 @@ Key Feature of this website:
 - Experience Designer found here
 - With reasonable price with good service
 - Ensure expert good jewellary
+- Satisfaction of customer our first priority
