@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const GetAddProduct = () => {
     const [added,setAdded] = useState([])
     useEffect(()=>{
-        fetch(`http://localhost:5000/getallproduct`)
+        fetch(`https://shielded-caverns-45156.herokuapp.com/getallproduct`)
         .then(res=>res.json())
         .then(data=>setAdded(data))
     },[])

@@ -10,7 +10,7 @@ const AddedOrder = () => {
     const [addedOrder,setAddedOrder] = useState({})
     let { orderId } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:5000/${orderId}`)
+        fetch(`https://shielded-caverns-45156.herokuapp.com/${orderId}`)
             .then(res => res.json())
             .then(result => console.log(result))
     }, [])

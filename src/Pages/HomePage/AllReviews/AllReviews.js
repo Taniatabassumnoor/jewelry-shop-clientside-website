@@ -11,7 +11,7 @@ import { Box } from '@mui/system';
 const AllReviews = () => {
     const [allReview,setAllReview] = useState([])
     useEffect(()=>{
-        fetch(`http://localhost:5000/allreviews`)
+        fetch(`https://shielded-caverns-45156.herokuapp.com/allreviews`)
         .then(res=>res.json())
         .then(data=>setAllReview(data))
     },[])

@@ -18,7 +18,7 @@ const AddProduct = () => {
     }
     const handleAddProductSubmit = e => {
         alert('submit?');
-        fetch('http://localhost:5000/addProduct', {
+        fetch('https://shielded-caverns-45156.herokuapp.com/addProduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

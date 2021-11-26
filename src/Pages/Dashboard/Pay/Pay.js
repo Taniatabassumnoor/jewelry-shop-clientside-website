@@ -5,7 +5,7 @@ const Pay = () => {
     // const {purchaseId} = useParams()
     // const [purchase,setPurchase] = useState([]);
     // useEffect(()=>{
-    //     fetch(`http://localhost:5000/explore_item/${purchaseId}`)
+    //     fetch(`https://shielded-caverns-45156.herokuapp.com/explore_item/${purchaseId}`)
     //     .then(res=>res.json())
     //     .then(data=>setPurchase(data))
     // },[purchaseId])
