@@ -6,7 +6,7 @@ const ExploreHome = () => {
     return (
         <div>
             <Explore></Explore>
-            <GetAddProduct></GetAddProduct>
+            {/* <GetAddProduct></GetAddProduct> */}
         </div>
     );
 };

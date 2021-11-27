@@ -36,6 +36,7 @@ const Headers = () => {
             :
             <NavLink style={{textDecoration:'none',color:'white'}} to="/login"><Button color="inherit">Login</Button></NavLink>
           }
+          <NavLink style={{textDecoration:'none',color:'white'}} to="/home"><Button color="inherit">Home</Button></NavLink>
           <NavLink style={{textDecoration:'none',color:'white'}} to="/explore"><Button color="inherit">Explore</Button></NavLink>
           <NavLink style={{textDecoration:'none',color:'white'}} to="/about"><Button color="inherit">About Us</Button></NavLink>
         </Toolbar>

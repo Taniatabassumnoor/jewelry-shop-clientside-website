@@ -1,0 +1,19 @@
+
+.appointment-form{
+  margin-left: 42%;
+  margin-top: 5%;
+}
+.appointment-form input{
+    display: block;
+    margin-top: 30px;
+    padding: 5px;
+    border: 1px solid red;
+    border-radius: 5px;
+    width: 300px;
+}
+.error{
+    color: red;
+}
+.head{
+    font-size: 50px;
+}

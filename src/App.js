@@ -11,6 +11,7 @@ import Login from './Pages/Login/Login/Login/Login';
 import Register from './Pages/Login/Login/Register/Register';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Purchase from './Pages/PurchasePage/Purchase/Purchase';
+import Booking from './Pages/Shared/Booking/Booking';
 import Headers from './Pages/Shared/Headers/Headers';
 import Order from './Pages/Shared/Order/Order';
 
@@ -29,6 +30,7 @@ function App() {
         <Route  path="/register"><Register></Register></Route>
         <Route  path="/explore"><ExploreHome></ExploreHome></Route>
         <Route  path="/about"><About></About></Route>
+        <Route  path="/booking/:serviceId"><Booking></Booking></Route>
         <Route  path="/order/:orderId"><Order></Order></Route>
         
         <PrivateRoute  path="/purchase"><Purchase></Purchase></PrivateRoute>

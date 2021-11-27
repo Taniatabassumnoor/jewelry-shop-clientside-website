@@ -31,7 +31,7 @@ const AddProduct = () => {
             })
         e.preventDefault();
     }
-   
+
     return (
         <div>
            <h1>Please Add a Product</h1> 
@@ -64,7 +64,7 @@ const AddProduct = () => {
            onBlur={handleOnBlur}
            label="Price" 
            variant="standard" /> <br /> <br />
-           
+
            <Button type="submit" variant="contained">Submit</Button>
            </form>
         </div>
@@ -72,3 +72,53 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
+
+
+// import React from 'react';
+// import { useForm } from 'react-hook-form';
+// import './AddProduct.css';
+// import { useHistory } from 'react-router';
+// import useFirebase from '../../../Hooks/useFirebase';
+// const AddProduct = () => {
+//     const {user} = useFirebase();
+//     const {
+//       register,
+//       handleSubmit,
+//       watch,
+//       formState: { errors },
+//     } = useForm();
+  
+//     const onSubmit = (data) => {
+//         alert('submit?');
+//       fetch("https://shielded-caverns-45156.herokuapp.com/addExplore", {
+//         method: "POST",
+//         headers: { "content-type": "application/json" },
+//         body: JSON.stringify(data),
+//       })
+//         .then((res) => res.json())
+//         .then((result) => console.log(result));
+//       console.log(data);
+//     };
+//     const history = useHistory()
+//     const handleAppointment = () => {
+//         history.push('/home')
+//     }
+//     return (
+//         <div>
+//         <h1 className=" pt-5 text-danger fw-bold head">Add A product</h1>
+//         <form className="appointment-form" onSubmit={handleSubmit(onSubmit)}>      
+//   {/* <input defaultValue={user.displayName} {...register("name")} />
+//   <input defaultValue={user.email} {...register("email", { required: true })} /> */}
+//   {errors.email && <span className="error">This field is required</span>}
+//   <input placeholder="Image Url" defaultValue="" {...register("imageUrl")} />
+//   <input placeholder="Product Name" defaultValue="" {...register("productName")} />
+//   <input placeholder="Description" defaultValue="" {...register("description")} />
+//   <input placeholder="Price" defaultValue="" {...register("price")} />
+//   <input onClick={handleAppointment} className="appointment-btn" type="submit" />
+// </form>
+//     </div>
+//     );
+// };
+
+// export default AddProduct;
