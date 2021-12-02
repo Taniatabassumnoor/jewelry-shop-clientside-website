@@ -30,18 +30,18 @@ const Booking = () => {
     };
     const { serviceId } = useParams()
     const [service, setService] = useState({})
-    const [serviceItem, setServiceItem] = useState({})
+
     useEffect(() => {
         fetch(`https://shielded-caverns-45156.herokuapp.com/singleProduct/${serviceId}`)
             .then((res) => res.json())
             .then((result) => setService(result));
     }, []);
-    useEffect(() => {
-        fetch(`https://shielded-caverns-45156.herokuapp.com/singleProduct/${serviceId}`)
-            .then((res) => res.json())
-            .then((result) => setServiceItem(result));
-    }, []);
-    console.log(service);
+    // useEffect(() => {
+    //     fetch(`https://shielded-caverns-45156.herokuapp.com/singleProduct/${serviceId}`)
+    //         .then((res) => res.json())
+    //         .then((result) => setServiceItem(result));
+    // }, []);
+    // console.log(service);
     return (
         <div>
             <h1 className=" pt-5 text-danger fw-bold head">Booking Form</h1>
@@ -51,10 +51,10 @@ const Booking = () => {
                             <input defaultValue={user.displayName} {...register("name")} />
                             <input defaultValue={user.email} {...register("email", { required: true })} />
                             {errors.email && <span className="error">This field is required</span>}
-                            <input defaultValue={serviceItem?.imageUrl}{...register("imgUrl")} />
-                            <input defaultValue={serviceItem?.productName} {...register("productname")} />
-                            <input defaultValue={serviceItem?.productDescription} {...register("productdescription")} />
-                            <input defaultValue={serviceItem?.productPrice} {...register("productprice")} />
+                            <input defaultValue={service?.imageUrl}{...register("imgUrl")} />
+                            <input defaultValue={service?.productName} {...register("productname")} />
+                            <input defaultValue={service?.productDescription} {...register("productdescription")} />
+                            <input defaultValue={service?.productPrice} {...register("productprice")} />
                             <input placeholder="Phone" defaultValue="" {...register("Phone")} />
                             <input placeholder="Address" defaultValue="" {...register("Address")} />
                             <input placeholder="City" defaultValue="" {...register("City")} />
@@ -71,19 +71,19 @@ const Booking = () => {
                             <CardMedia
                                 component="img"
                                 style={{ width: '100%', height: '350px', margin: '0 auto' }}
-                                image={serviceItem?.imageUrl
+                                image={service?.imageUrl
                                 }
                                 alt="green iguana"
                             />
                             <CardContent sx={{p:3}} >
                                 <Typography sx={{p:1}} variant="h5" component="div">
-                                Product Name: {serviceItem?.productName}
+                                Product Name: {service?.productName}
                                 </Typography>
                                 <Typography sx={{p:1,color:'gray',fontSize:'17px'}} variant="h6" component="div">
-                                 Description: {serviceItem?.productDescription}
+                                 Description: {service?.productDescription}
                                 </Typography>
                                 <Typography sx={{p:1}} variant="h6" component="div">
-                                Price: $ {serviceItem?.productPrice}
+                                Price: $ {service?.productPrice}
                                 </Typography>
                             </CardContent>
                         </Card>
