@@ -8,13 +8,13 @@ const MyOrder = () => {
     const [item,setItem] = useState([])
     const [deleteControl,setDeleteControl] = useState(false)
     useEffect(()=>{
-        fetch(`http://localhost:5000/myOrderItem/${user.email}`)
+        fetch(`https://shielded-caverns-45156.herokuapp.com/${user.email}`)
         .then(res=>res.json())
         .then(data=>setItem(data))
     },[])
     // Handle Delete
     // handleDelete = (id) => {
-    //     fetch(`http://localhost:5000/deleteOrder/${id}`,{
+    //     fetch(`https://shielded-caverns-45156.herokuapp.com/deleteOrder/${id}`,{
     //         method:'DELETE',
     //     })
     //     .then(res=>res.json())
@@ -30,7 +30,7 @@ const MyOrder = () => {
     }
 
     // const handleDeleteItem = id => {
-    // const url = `http://localhost:5000/deleteControl/${id}`;
+    // const url = `https://shielded-caverns-45156.herokuapp.com/deleteControl/${id}`;
     // fetch(url,{
     //     method:'DELETE'
     // })
