@@ -5,13 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 const Service = (props) => {
     const history = useHistory();
-const handlePurchase = e => {
-history.push('/purchase')
-    e.preventDefault();
-}
+// const handlePurchase = e => {
+// history.push('/purchase')
+//     e.preventDefault();
+// }
     const { name, description, img } = props.service;
     return (
         <Grid item xs={12} sm={6} md={3}>
@@ -29,7 +29,7 @@ history.push('/purchase')
                 <Typography sx={{pb:2}} variant="body2" color="text.secondary">
                     {description}
                 </Typography>
-                <Button onClick={handlePurchase} style={{backgroundColor:'skyblue',color:'white'}}  variant="contained" size="small">Buy Now</Button>
+                <NavLink to="/explore"><Button  style={{backgroundColor:'skyblue',color:'white',textDecoration:"none"}}  variant="contained" size="small">Buy Now</Button></NavLink>
             </CardContent>
         </Card>
     </Grid>

@@ -12,10 +12,10 @@ const Booking = () => {
 
     //     history.push('/home')
     // }
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register,reset, handleSubmit, formState: { errors } } = useForm();
     const { user } = useAuth();
     const onSubmit = data => {
-            fetch(`https://shielded-caverns-45156.herokuapp.com/confirmOrder`,{
+            fetch(`http://localhost:5000/confirmOrder`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -32,16 +32,14 @@ const Booking = () => {
     const [service, setService] = useState({})
 
     useEffect(() => {
-        fetch(`https://shielded-caverns-45156.herokuapp.com/singleProduct/${serviceId}`)
+        fetch(`http://localhost:5000/singleProduct/${serviceId}`)
             .then((res) => res.json())
-            .then((result) => setService(result));
-    }, []);
-    // useEffect(() => {
-    //     fetch(`https://shielded-caverns-45156.herokuapp.com/singleProduct/${serviceId}`)
-    //         .then((res) => res.json())
-    //         .then((result) => setServiceItem(result));
-    // }, []);
-    // console.log(service);
+            .then((result) => {
+                setService(result)
+                reset(result)
+            });
+    }, [reset]);
+    
     return (
         <div>
             <h1 className=" pt-5 text-danger fw-bold head">Booking Form</h1>

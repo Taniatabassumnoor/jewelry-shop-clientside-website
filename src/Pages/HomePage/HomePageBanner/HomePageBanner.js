@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 const verticalCenter = {
     display: 'flex',
     alignItems: 'center',
@@ -19,7 +20,7 @@ const HomePageBanner = () => {
                     <Typography variant="h3" sx={{ my: 3, fontSize: 13, fontWeight: 300, color: 'salmon' }}>
                     JEWELRY DESIGN WITH LOVE
                     </Typography>
-                    <Button variant="contained" style={{ backgroundColor: 'skyblue',marginTop:'3%' }}>Buy Now</Button>
+                    <NavLink style={{textDecoration:"none"}} to="/explore"><Button variant="contained" style={{ backgroundColor: 'skyblue',marginTop:'3%' }}>Buy Now</Button></NavLink>
                 </Box>
             </Grid>
             <Grid style={verticalCenter} item xs={12} md={6}>

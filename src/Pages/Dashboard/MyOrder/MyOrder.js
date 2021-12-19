@@ -1,64 +1,112 @@
+import { Card, CardContent, CardMedia, Container, Grid, Typography,item, Button, getPopoverUtilityClass, CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
-import Service from '../../HomePage/Service/Service';
+import useAuth from '../../../Hooks/useAuth';
+import { CardActionArea } from '@mui/material';
+import { Box } from '@mui/system';
 const MyOrder = () => {
-    let { orderId } = useParams();
-    const [serviceDetails, setServiceDetails] = useState({});
+    const {user,isLoading} = useAuth();
+    const [item,setItem] = useState([])
+    const [deleteControl,setDeleteControl] = useState(false)
+    useEffect(()=>{
+        fetch(`http://localhost:5000/myOrderItem/${user.email}`)
+        .then(res=>res.json())
+        .then(data=>setItem(data))
+    },[])
+    // Handle Delete
+    // handleDelete = (id) => {
+    //     fetch(`http://localhost:5000/deleteOrder/${id}`,{
+    //         method:'DELETE',
+    //     })
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //       console.log(data)  
+    //     })
+    //     alert("Deleted Successfully");
+    //    this.getPost();
+       
+    // }
+    if(isLoading){
+        return <CircularProgress color="secondary" />
+    }
 
-    useEffect(() => {
-        fetch(`https://shielded-caverns-45156.herokuapp.com/explore_item/${orderId}`)
-            .then(res => res.json())
-            .then(result => setServiceDetails(result))
-    }, [])
-const handleDelete = id => {
-    const url = `https://shielded-caverns-45156.herokuapp.com/explore_item/${id}`
-    fetch(url,{
-        method:'DELETE'
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-        if(data.deletedCount){
-            alert('Are you Sure?')
-            const remaining = serviceDetails.filter(service=>service._id !==id)
-        setServiceDetails(remaining)
-        }
-    })
+    // const handleDeleteItem = id => {
+    // const url = `http://localhost:5000/deleteControl/${id}`;
+    // fetch(url,{
+    //     method:'DELETE'
+    // })
+    // .then(res=>res.json())
+    // .then(data=>{
+    //     if(data.deletedCount) {
+    //         // const remaining = item.filter((pd) => pd._id !== id);
+    //         // setItem(remaining);
+    //         setDeleteControl(!deleteControl)
+    //     }
+        
+    // })
+    // alert("delete?")
+    // }
     
-    
-}
-
     return (
-        <Container >
-            <Card sx={{ maxWidth: 345,margin:"0 auto",pt:"15%" }}>
-                <CardMedia
-                    component="img"
-                    width="100%"
-                    image={serviceDetails.img}
-                    alt="green iguana"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {serviceDetails.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {serviceDetails.description}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Price:$ {serviceDetails.price}
-                    </Typography>
-                    <Link to="/purchase"><Button variant="contained">Purchase Now</Button></Link>
-                    <Button onClick={()=>handleDelete(serviceDetails._id)} variant ="contained">Delete</Button>
-                </CardContent>
-            </Card>
+        <Container>
+            <h1>My Order {item.length}</h1>
+            <Box >
+                <Box style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)",gap:"5%"}}>
+                    
+                {
+                    
+    item.map(pd=>(
+        
+        <Card 
+        key={pd._id}
+        sx={{ maxWidth: 600,mx:"5%"}}>
+            
+  <CardActionArea>
+    <CardMedia
+      style={{ width: '100%', height: '300px'}}
+      image={pd.imageUrl}
+      alt="green iguana"
+    />
+    <CardContent >
+      <Typography gutterBottom variant="h5" component="div">
+       Product Name: {pd.productName}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+      Description: {pd.productDescription}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+       Price:$ {pd.productPrice}
+      </Typography> 
+    </CardContent>
+  </CardActionArea>
+  <Button  style={{ backgroundColor:"salmon",color:"#fff",fontWeight:"bold",marginBottom:"18%",marginTop:"10px"}} >Delete</Button>
+</Card>
+
+    ))
+}
+                </Box>
+                
+            </Box>
         </Container>
     );
 };
 
 export default MyOrder;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
