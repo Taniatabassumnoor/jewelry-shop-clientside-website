@@ -15,7 +15,7 @@ const Booking = () => {
     const { register,reset, handleSubmit, formState: { errors } } = useForm();
     const { user } = useAuth();
     const onSubmit = data => {
-            fetch(`http://localhost:5000/confirmOrder`,{
+            fetch(`https://shielded-caverns-45156.herokuapp.com/`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -32,7 +32,7 @@ const Booking = () => {
     const [service, setService] = useState({})
 
     useEffect(() => {
-        fetch(`http://localhost:5000/singleProduct/${serviceId}`)
+        fetch(`https://shielded-caverns-45156.herokuapp.com/${serviceId}`)
             .then((res) => res.json())
             .then((result) => {
                 setService(result)
