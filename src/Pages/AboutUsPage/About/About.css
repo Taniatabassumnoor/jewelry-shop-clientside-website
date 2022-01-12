@@ -1,0 +1,34 @@
+.about{
+    background-image: url('https://i.ibb.co/2YbvRVP/pexels-arif-khan-4595717.jpg');
+    background-position: center;
+  background-size: cover;
+  height: 400px;
+  background-blend-mode: overlay;
+  margin-bottom: 50px;
+}
+.about-banner{
+  background-image: url('https://cdn.shopify.com/s/files/1/0525/5456/3756/files/b1.jpg?v=1609908213');
+  background-position: center;
+background-size: cover;
+height: 400px;
+background-blend-mode: overlay;
+/* margin-bottom: 50px; */
+}
+.about1{
+text-align: center;
+padding-top: 150px;
+}
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform .5s ease;
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.5);
+}
+.about-bg{
+  background-color: black;
+  color: aliceblue;
+}

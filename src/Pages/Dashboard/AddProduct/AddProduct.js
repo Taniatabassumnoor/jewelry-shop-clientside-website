@@ -1,124 +1,69 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
-
+import axios from "axios";
+import React from "react";
+import { useForm } from "react-hook-form";
+import "./AddProduct.css";
 const AddProduct = () => {
-    const [addProduct,setAddProduct] = useState({})
-    const handleOnBlur = e => {
-        const field = e.target.name;
-
-        const value = e.target.value;
-        const newInfo = { ...addProduct }
-        newInfo[field] = value;
-        console.log(newInfo, field, value)
-        setAddProduct(newInfo)
-    }
-
-    const addProductIs = {
-        ...addProduct
-    }
-    const handleAddProductSubmit = e => {
-        alert('submit?');
-        fetch('https://shielded-caverns-45156.herokuapp.com/addProduct', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(addProductIs)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
-        e.preventDefault();
-    }
-
-    return (
-        <div>
-           <h1>Please Add a Product</h1> 
-           <form onSubmit={handleAddProductSubmit}>
-           <TextField
-            sx={{ width: '75%',m: 1 }}
-           id="standard-basic" 
-           name="imageUrl"
-           onBlur={handleOnBlur}
-           label="Image Url" 
-           variant="standard" /> <br />
-           <TextField
-             sx={{ width: '75%',m: 1 }}
-           id="standard-basic" 
-           name="productName"
-           onBlur={handleOnBlur}
-           label="Product Name" 
-           variant="standard" /> <br />
-           <TextField
-             sx={{ width: '75%',m: 1 }}
-           id="standard-basic"
-           name="productDescription" 
-           onBlur={handleOnBlur}
-           label="Description" 
-           variant="standard" /> <br />
-           <TextField
-             sx={{ width: '75%',m: 1 }}
-           id="standard-basic" 
-           name="productPrice"
-           onBlur={handleOnBlur}
-           label="Price" 
-           variant="standard" /> <br /> <br />
-
-           <Button type="submit" variant="contained">Submit</Button>
-           </form>
-        </div>
-    );
+  const { register, handleSubmit, reset, setValue } = useForm();
+  // onsubmit function
+  const onSubmit = (data) => {
+    axios.post("http://localhost:5000/products", data).then((res) => {
+      if (res.data.insertedId) {
+        reset();
+      }
+    });
+  };
+  setValue("status", "pending");
+  return (
+    <div className="pt-5 form-design">
+      <h3 className="text-light pt-5">Add Products</h3>
+      {/* add product form */}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.01)" }}
+          placeholder="Img-url"
+          {...register("img")}
+        />{" "}
+        <br />
+        {/* product title */}
+        <input
+          style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.01)" }}
+          placeholder="Name"
+          type="text"
+          {...register("name")}
+        />{" "}
+        <br />
+        {/* description */}
+        <input
+          style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.01)" }}
+          placeholder="description"
+          type="text"
+          {...register("description")}
+        />{" "}
+        <br />
+        {/* Price */}
+        <input
+          style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.01)" }}
+          placeholder="Price"
+          type="number"
+          {...register("price")}
+        />{" "}
+        <br />
+        {/* status */}
+        <input
+          style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.01)" }}
+          className="d-none"
+          type="text"
+          {...register("status")}
+        />{" "}
+        <br />
+        <input
+          type="submit"
+          className="rounded-pill btn btn-light"
+          value="Add service"
+        />
+      </form>
+    </div>
+  );
 };
 
 export default AddProduct;
-
-
-
-// import React from 'react';
-// import { useForm } from 'react-hook-form';
-// import './AddProduct.css';
-// import { useHistory } from 'react-router';
-// import useFirebase from '../../../Hooks/useFirebase';
-// const AddProduct = () => {
-//     const {user} = useFirebase();
-//     const {
-//       register,
-//       handleSubmit,
-//       watch,
-//       formState: { errors },
-//     } = useForm();
-  
-//     const onSubmit = (data) => {
-//         alert('submit?');
-//       fetch("https://shielded-caverns-45156.herokuapp.com/addExplore", {
-//         method: "POST",
-//         headers: { "content-type": "application/json" },
-//         body: JSON.stringify(data),
-//       })
-//         .then((res) => res.json())
-//         .then((result) => console.log(result));
-//       console.log(data);
-//     };
-//     const history = useHistory()
-//     const handleAppointment = () => {
-//         history.push('/home')
-//     }
-//     return (
-//         <div>
-//         <h1 className=" pt-5 text-danger fw-bold head">Add A product</h1>
-//         <form className="appointment-form" onSubmit={handleSubmit(onSubmit)}>      
-//   {/* <input defaultValue={user.displayName} {...register("name")} />
-//   <input defaultValue={user.email} {...register("email", { required: true })} /> */}
-//   {errors.email && <span className="error">This field is required</span>}
-//   <input placeholder="Image Url" defaultValue="" {...register("imageUrl")} />
-//   <input placeholder="Product Name" defaultValue="" {...register("productName")} />
-//   <input placeholder="Description" defaultValue="" {...register("description")} />
-//   <input placeholder="Price" defaultValue="" {...register("price")} />
-//   <input onClick={handleAppointment} className="appointment-btn" type="submit" />
-// </form>
-//     </div>
-//     );
-// };
-
-// export default AddProduct;

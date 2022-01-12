@@ -1,47 +1,76 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import './Headers.css'
+import {
+  Container,
+  Nav,
+  Navbar
+} from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 const Headers = () => {
-  const {user,logOut} = useAuth();
+  const { user, logout } = useAuth();
+  const navDesign = {
+    color: "red",
+  };
     return (
-        <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+<Navbar fixed="top" bg="dark" expand="lg" className="nav">
+      <Container fluid>
+        <Navbar.Brand
+          href="#"
+          className="navStyle logo"
+          style={{ color: "white" }}
+        >
+          Twinkle Stone
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px" }}
+            navbarScroll
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-           Twinkle Stone
-          </Typography>
-          {
-            user?.email ? 
-            <Box>
-              <NavLink style={{textDecoration:'none',color:'white'}} to="/dashboard"><Button color="inherit">Dashboard</Button></NavLink>
-             <Button onClick={logOut} color="inherit">LogOut</Button>
-            </Box>
-           
-            :
-            <NavLink style={{textDecoration:'none',color:'white'}} to="/login"><Button color="inherit">Login</Button></NavLink>
-          }
-          <NavLink style={{textDecoration:'none',color:'white'}} to="/home"><Button color="inherit">Home</Button></NavLink>
-          <NavLink style={{textDecoration:'none',color:'white'}} to="/explore"><Button color="inherit">Explore</Button></NavLink>
-          <NavLink style={{textDecoration:'none',color:'white'}} to="/about"><Button color="inherit">About Us</Button></NavLink>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            <NavLink className="navStyle" activeStyle={navDesign} to="/home">
+              Home
+            </NavLink>
+            <NavLink
+              className="navStyle"
+              activeStyle={navDesign}
+              to="/explore"
+            >
+              Explore Products
+            </NavLink>
+            <NavLink className="navStyle" activeStyle={navDesign} to="/about">
+              About
+            </NavLink>
+            {user.email && <NavLink className="navStyle" activeStyle={navDesign} to="/dashboard">
+              Dashboard
+            </NavLink>}
+          </Nav>
+          <Nav>
+          {user.displayName &&
+                <div>
+                  <img src={user?.image} alt="" />
+                  <button className="btn me-3  text-light p-2" style={{ height: '50px' }}>{user.displayName}</button>
+                </div>
+              }         
+            {user.email ? (
+              <button
+                onClick={logout}
+                className="btn btn-outline-light rounded-pill"
+              >
+                Logout
+              </button>
+            ) : (
+              <NavLink className="navStyle" activeStyle={navDesign} to="/login">
+                <button className="btn btn-outline-light rounded-pill">
+                  Login
+                </button>
+              </NavLink>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
     );
 };
 

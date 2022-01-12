@@ -1,0 +1,30 @@
+.field{
+    width: 50%;
+    border: 1px solid gray;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+}
+.reviews1{
+    width: 40%;
+    border-bottom: 3px solid white;
+}
+.review_bg{
+    /* background-image: url('https://i.ibb.co/N1Nnvvp/ripple-ornament-forever-drop-costume.jpg'); */
+    color: rgb(17, 6, 6);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    /* background-blend-mode: overlay; */
+    /* background-color: rgba(0, 0, 0, 0.801) !important; */
+}
+.center{
+    padding-Top:50px;
+   padding-left: 50px;
+}
+
+.review-btn{
+    margin-left: 20px;
+    width: 150px;
+}

@@ -1,47 +1,52 @@
-import { Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import Rating from 'react-rating';
+import useAuth from '../../../Hooks/useAuth';
 
 const AllReviews = () => {
     const [allReview,setAllReview] = useState([])
+    const {user} = useAuth()
     useEffect(()=>{
-        fetch(`https://shielded-caverns-45156.herokuapp.com/allreviews`)
+        fetch(`http://localhost:5000/allreviews`)
         .then(res=>res.json())
         .then(data=>setAllReview(data))
     },[])
     return (
         <Container>
-             <h1>All reviews</h1>
+             <h1 style={{textAlign:"center",color:"#000"}}>All reviews</h1>
         
-        {
-            allReview.map(review=>(
-                <Grid >
-                <Box xs={12} sm={6} md={3}>
-                <Card sx={{ minWidth: 275, border: 0, boxShadow: 0 }}>
-                    
-                    <CardContent sx={{p:3}} >
-                        <Typography sx={{p:1}} variant="h5" component="div">
-                        <i class="fas fa-user-circle"></i>
-                        </Typography>
-                        <Typography sx={{p:1}} variant="h5" component="div">
-                            {review.customerName}
-                        </Typography>
-                        <Typography sx={{p:1}} variant="h5" component="div">
-                            {review.customerReview}
-                        </Typography>
-                    </CardContent>
-                </Card>
-                </Box>
-            </Grid>
-                
-            ))
-        }
+             <Row md={4} lg={3} sm={1}>
+             {
+    allReview.map(review=>(
+        <>
+<div>
+<Col sm={12} md={4} className="mb-5 mt-5 ">
+<Card style={{ width: "18rem" }}>
+<Card.Img variant="top" src={user.imgUrl} />
+<Card.Body>
+<Card.Title className="logo" style={{ fontWeight: "bolder" }}>
+  {review.customerName}
+</Card.Title>
+<Card.Text> {review.customerReview}</Card.Text>
+<Rating
+  readonly
+  emptySymbol="fa fa-star-o "
+  fullSymbol="fa fa-star "
+  fractions={2}
+  initialRating={review.customerRating}
+></Rating>
+</Card.Body>
+</Card>
+</Col>
+</div>
+</>
+ 
+        
+    ))
+}
+        </Row>
 
     
         </Container>
@@ -50,4 +55,3 @@ const AllReviews = () => {
 
 export default AllReviews;
 
-{/* <p>{review.customerReview}</p> */}

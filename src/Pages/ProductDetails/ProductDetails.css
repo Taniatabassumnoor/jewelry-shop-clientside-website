@@ -1,0 +1,15 @@
+.form-design1 input{
+    width: 80%;
+    margin: 10px;
+    border: 1px solid gray;
+}
+.form-design1{
+    text-align: center;
+    background-image: url('https://i.ibb.co/tXc5tTv/po5.jpg');
+    background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 800px;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.801) !important;
+}

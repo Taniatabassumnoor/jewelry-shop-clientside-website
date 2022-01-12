@@ -2,6 +2,7 @@ import { Button, Container, Grid, TextField } from '@mui/material';
 
 import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
+import './Reviews.css'
 
 
 
@@ -32,7 +33,7 @@ const Reviews = () => {
             email: user.email
         }
         // send to the server
-        fetch('https://shielded-caverns-45156.herokuapp.com/reviews', {
+        fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -48,23 +49,29 @@ const Reviews = () => {
     }
 
     return (
- <Container style={{margin:'0 auto'}}>
-                 <Grid container spacing={2}>
+ <Container className='review_bg center' style={{margin:'0 auto'}}>
+     <h2 className="reviews1 logo">
+        Review <span className="text-danger">section</span>
+      </h2>
+                 <Grid container  spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <form onSubmit={handleBookingSubmit}>
+                    <form  onSubmit={handleBookingSubmit}>
                         <TextField
                             disabled
-                            sx={{ width: '90%', m: 1 }}
+                            sx={{ width: '90%', m: 1,  color: "white",
+                            backgroundColor: "rgba(0, 0, 0, 0.01)" }}
                             id="outlined-size-small"
                             defaultValue={user.displayName}
                             size="small"
+                            className="reviews1"
                         />
                         <TextField
                             disabled
-                            sx={{ width: '90%', m: 1 }}
+                            sx={{ width: '90%', m: 1,color:"#fff" }}
                             id="outlined-size-small"
                             defaultValue={user?.email}
                             size="small"
+                            className="field"
                         />
                         <TextField
                             sx={{ width: '90%',m: 1 }}
@@ -73,11 +80,35 @@ const Reviews = () => {
                             name="customerReview"
                             onBlur={handleOnBlur}
                             size="small"
+                            className="field"
                         />
 
                         <br />
+                        <TextField
+                            sx={{ width: '90%',m: 1 }}
+                            id="outlined-size-small"
+                            defaultValue="rating between 1 to 5"
+                            name="customerRating"
+                            onBlur={handleOnBlur}
+                            size="small"
+                            className="field"
+                        />
 
-                        <Button type="submit" variant="contained">Submit</Button>
+                        <br />
+                        
+                        {/* <input
+          className="field"
+          required
+          placeholder="rating between 1 to 5"
+          style={{
+            color: "white",
+            backgroundColor: "rgba(0, 0, 0, 0.01)",
+          }}
+          {...register("ratings", { required: true })}
+        />
+        <br /> */}
+
+                        <Button className='review-btn' type="submit" variant="contained">Submit</Button>
                     </form>
                 </Grid>
                 <Grid item xs={12} md={6}>

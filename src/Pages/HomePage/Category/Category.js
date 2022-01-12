@@ -35,7 +35,7 @@ const Category = () => {
     return (
         <Box sx={{ flexGrow: 1,mt:25,mb:15 }}>
         <Container>
-            <Typography sx={{ fontWeight: 600, m:'5%',color:'skyblue' }} variant="h4" component="div">
+            <Typography sx={{ fontWeight: 600, m: '5%', color: '#000',textAlign:'center' }} variant="h4" component="div">
                 Our Categories
             </Typography>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>

@@ -1,96 +1,134 @@
-import { Card, CardContent, CardMedia, Container, Grid, Typography,item, Button, getPopoverUtilityClass, CircularProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import useAuth from '../../../Hooks/useAuth';
-import { CardActionArea } from '@mui/material';
-import { Box } from '@mui/system';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Button, Container } from "@mui/material";
+import { Box } from "@mui/system";
+import useAuth from "../../../Hooks/useAuth";
+
+
 const MyOrder = () => {
-    const {user,isLoading} = useAuth();
-    const [item,setItem] = useState([])
-    const [deleteControl,setDeleteControl] = useState(false)
-    useEffect(()=>{
-        fetch(`https://shielded-caverns-45156.herokuapp.com/${user.email}`)
-        .then(res=>res.json())
-        .then(data=>setItem(data))
-    },[])
-    // Handle Delete
-    // handleDelete = (id) => {
-    //     fetch(`https://shielded-caverns-45156.herokuapp.com/deleteOrder/${id}`,{
-    //         method:'DELETE',
-    //     })
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //       console.log(data)  
-    //     })
-    //     alert("Deleted Successfully");
-    //    this.getPost();
-       
-    // }
-    if(isLoading){
-        return <CircularProgress color="secondary" />
+  const [orders, setOrders] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    axios
+      .get(` https://shielded-caverns-45156.herokuapp.com/myorders?email=${user.email}`)
+      .then((res) => setOrders(res.data));
+  }, []);
+  const reducer = (previousValue, currentValue) =>
+    previousValue + parseInt(currentValue.price);
+  const totalPrice = orders.reduce(reducer, 0);
+
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure, you want to delete?");
+    if (proceed) {
+      axios
+        .delete(` https://shielded-caverns-45156.herokuapp.com/orders/${id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            alert("product deleted");
+            const restData = orders.filter((order) => order._id !== id);
+            setOrders(restData);
+          }
+        });
     }
+  };
 
-    // const handleDeleteItem = id => {
-    // const url = `https://shielded-caverns-45156.herokuapp.com/deleteControl/${id}`;
-    // fetch(url,{
-    //     method:'DELETE'
-    // })
-    // .then(res=>res.json())
-    // .then(data=>{
-    //     if(data.deletedCount) {
-    //         // const remaining = item.filter((pd) => pd._id !== id);
-    //         // setItem(remaining);
-    //         setDeleteControl(!deleteControl)
-    //     }
-        
-    // })
-    // alert("delete?")
-    // }
-    
-    return (
-        <Container>
-            <h1>My Order {item.length}</h1>
-            <Box >
-                <Box style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)",gap:"5%"}}>
-                    
-                {
-                    
-    item.map(pd=>(
-        
-        <Card 
-        key={pd._id}
-        sx={{ maxWidth: 600,mx:"5%"}}>
-            
-  <CardActionArea>
-    <CardMedia
-      style={{ width: '100%', height: '300px'}}
-      image={pd.imageUrl}
-      alt="green iguana"
-    />
-    <CardContent >
-      <Typography gutterBottom variant="h5" component="div">
-       Product Name: {pd.productName}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-      Description: {pd.productDescription}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-       Price:$ {pd.productPrice}
-      </Typography> 
-    </CardContent>
-  </CardActionArea>
-  <Button  style={{ backgroundColor:"salmon",color:"#fff",fontWeight:"bold",marginBottom:"18%",marginTop:"10px"}} >Delete</Button>
-</Card>
-
-    ))
-}
-                </Box>
-                
-            </Box>
-        </Container>
-    );
+  return (
+    <Box>
+      <Container>
+        <h1>My Orders</h1>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Product Name</TableCell>
+                <TableCell align="center">Price</TableCell>
+                <TableCell align="center">Ordered By</TableCell>
+                <TableCell align="center">Status</TableCell>
+                <TableCell align="center">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {orders.map((order) => (
+                <TableRow
+                  key={order.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {order.name}
+                  </TableCell>
+                  <TableCell align="center">{order.price}</TableCell>
+                  <TableCell align="center">{user.displayName}</TableCell>
+                  {order.status === "Pending" ? (
+                    <TableCell
+                      sx={{
+                        bgcolor: "warning.main",
+                        fontWeight: "bold",
+                        color: "white",
+                        fontSize: 16,
+                      }}
+                      align="center"
+                    >
+                      {order.status}
+                    </TableCell>
+                  ) : (
+                    <TableCell
+                      sx={{
+                        bgcolor: "success.main",
+                        fontWeight: "bold",
+                        color: "white",
+                        fontSize: 16,
+                      }}
+                      align="center"
+                    >
+                      {order.status}
+                    </TableCell>
+                  )}
+                  <TableCell align="center">
+                    {" "}
+                    <Button
+                      onClick={() => handleDelete(order._id)}
+                      sx={{ bgcolor: "error.main" }}
+                      variant="contained"
+                    >
+                      {" "}
+                      Cancel Order{" "}
+                    </Button>{" "}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Box
+          sx={{
+            p: 2,
+            border: "1px solid gold",
+            width: "30%",
+            margin: "50px auto",
+          }}
+        >
+          <h3>Total Price: {totalPrice}</h3>
+        </Box>
+      </Container>
+    </Box>
+  );
 };
 
 export default MyOrder;
+
+
+
+
+
 
 
 

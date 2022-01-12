@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Spectral:ital,wght@1,200;1,300&display=swap');
+.navStyle{
+    text-decoration: none;
+    margin: 10px;
+    font-weight: bolder;
+    color: white;
+}
+.logo{
+    font-family: 'Courgette', cursive;
+    font-family: 'Spectral', serif;
+    font-weight: bolder;
+}
+
+.navStyle:hover{
+color: red;
+
+}
+.margin{
+    margin-top: 90px;
+}
+.drop{
+    background-color: #212529;
+    border: none;
+}
+.drop:hover{
+    background-color: red;
+}

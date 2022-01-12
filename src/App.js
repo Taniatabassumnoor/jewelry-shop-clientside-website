@@ -1,45 +1,93 @@
-import { Reviews } from '@mui/icons-material';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './Contexts/AuthProvider/AuthProvider';
 import About from './Pages/AboutUsPage/About/About';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
-import Explore from './Pages/ExplorePage/Explore/Explore';
+import Demo from './Pages/ExplorePage/Demo';
 import ExploreHome from './Pages/ExplorePage/ExploreHome/ExploreHome';
+
+
+
 import Home from './Pages/HomePage/Home/Home';
+import Services from './Pages/HomePage/Services/Services';
 import Login from './Pages/Login/Login/Login/Login';
 import Register from './Pages/Login/Login/Register/Register';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
-import Purchase from './Pages/PurchasePage/Purchase/Purchase';
-import Booking from './Pages/Shared/Booking/Booking';
+
+import PurchaseProduct from './Pages/ProductDetails/PurchaseProduct';
+
+
+import Footer from './Pages/Shared/Footer/Footer';
 import Headers from './Pages/Shared/Headers/Headers';
-import Order from './Pages/Shared/Order/Order';
+
 
 function App() {
   return (
-    <div className="App">
-     <AuthProvider>
-     <Router>
-      <Headers></Headers>
-      <Switch>
-      <Route exact path="/"><Home></Home></Route>
-        <Route exact path="/home"><Home></Home></Route>
-        
-        <Route  path="/login"><Login></Login></Route>
-        <Route  path="/review"><Reviews></Reviews></Route>
-        <Route  path="/register"><Register></Register></Route>
-        <Route  path="/explore"><ExploreHome></ExploreHome></Route>
-        <Route  path="/about"><About></About></Route>
-        <Route  path="/booking/:serviceId"><Booking></Booking></Route>
-        <Route  path="/order/:orderId"><Order></Order></Route>
-        
-        <PrivateRoute  path="/purchase"><Purchase></Purchase></PrivateRoute>
-        <PrivateRoute  path="/dashboard"><Dashboard></Dashboard></PrivateRoute>
-        
-      </Switch>
+    <div>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Headers />
+            <Home />
+            <Footer />
+          </Route>
+          <Route exact path="/home">
+            <Headers />
+            <Home />
+            <Footer />
+          </Route>
+          <Route exact path="/about">
+            <Headers />
+            <About />
+            <Footer />
+          </Route>
+          {/* <Route exact path="/contact">
+            <Headers />
+            <Contact />
+            <Footer />
+          </Route> */}
+          <Route exact path="/services">
+            
+            <Services/>
+            
+          </Route>
+          <PrivateRoute path="/products/:id">
+            <Headers />
+            <PurchaseProduct/>
+            <Footer />
+          </PrivateRoute>
+          <Route path="/login">
+            <Headers />
+            <Login />
+            <Footer />
+          </Route>
+          <Route path="/demo">
+            
+            <Demo></Demo>
+            
+          </Route>
+          <Route path="/explore">
+            <Headers />
+            <ExploreHome />
+            <Footer />
+          </Route>
+          <Route path="/register">
+            <Headers />
+            <Register />
+            <Footer />
+          </Route>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          {/* <Route exact path="*">
+            <NotFound />
+          </Route> */}
+        </Switch>
       </Router>
-     </AuthProvider>
-    </div>
+    </AuthProvider>
+  </div>
   );
 }
 

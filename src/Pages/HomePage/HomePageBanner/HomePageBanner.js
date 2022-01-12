@@ -1,34 +1,118 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-const verticalCenter = {
-    display: 'flex',
-    alignItems: 'center',
-    height: 400
-}
+
 const HomePageBanner = () => {
     return (
-        <Container>
-            <Grid container spacing={2}>
-            <Grid style={{ ...verticalCenter, textAlign: 'left' }} item xs={12} md={6}>
-                <Box>
-                    <Typography sx={{color:'orange',fontWeight:'bold',marginTop:'10%'}} variant="h2">
-                    High-End <br />
-                    Jewelry Items
-                    </Typography>
-                    <Typography variant="h3" sx={{ my: 3, fontSize: 13, fontWeight: 300, color: 'salmon' }}>
-                    JEWELRY DESIGN WITH LOVE
-                    </Typography>
-                    <NavLink style={{textDecoration:"none"}} to="/explore"><Button variant="contained" style={{ backgroundColor: 'skyblue',marginTop:'3%' }}>Buy Now</Button></NavLink>
-                </Box>
-            </Grid>
-            <Grid style={verticalCenter} item xs={12} md={6}>
-                <img style={{ width: '700px',marginTop:'80px' }} src="https://i.ibb.co/gFy80tZ/homepagebanner.jpg" alt="" />
-            </Grid>
-        </Grid>
-        </Container>
+        <div className="">
+        <div
+          id="carouselExampleCaptions"
+          className="carousel slide carousalstyle"
+          data-bs-ride="carousel"
+        >
+          <div className="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide-to="0"
+              className="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img
+                src="https://i.ibb.co/5BB1TBM/Concept-of-wedding-accessories-with-wedding-ring-close-up.jpg"
+                className="d-block w-100"
+                alt="..."
+                style={{ widch:"400px",height: "600px",objectFit:"cover" }}
+              />
+              <div
+                className="carousel-caption d-none d-md-block logo"
+                style={{ paddingBottom: "200px", color: "black" }}
+              >
+                <small>Variety Of Color</small>
+                <h1>"Elegant & Royal Collection"</h1>
+                <NavLink to="/explore"><button className="btn btn-dark">View More</button></NavLink>
+              </div>
+            </div>
+  
+            <div className="carousel-item ">
+              <img
+                src="https://i.ibb.co/18QF1xJ/closeup-beautiful-wedding-jewelry-set.jpg"
+                className="d-block w-100"
+                style={{ widch:"400px",height: "600px",objectFit:"cover"}}
+                alt="..."
+              />
+  
+              <div
+                className="carousel-caption d-none  d-md-block logo text-dark"
+                style={{ paddingBottom: "200px" }}
+              >
+                <small>Variety Of Color</small>
+                <h1>"Elegant & Royal Collection"</h1>
+                <NavLink to="/explore"><button className="btn btn-dark">View More</button></NavLink>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://i.ibb.co/3kjFzHF/pexels-karen-la-rk-boshoff-7436102.jpg"
+                className="d-block w-100"
+                style={{ widch:"400px",height: "600px",objectFit:"cover" }}
+                alt="..."
+              />
+              <div
+                className="carousel-caption d-none d-md-block logo text-dark "
+                style={{ paddingBottom: "200px" }}
+              >
+                <small>Variety Of Color</small>
+                <h1>"Elegant & Royal Collection"</h1>
+                <NavLink to="/explore"><button className="btn btn-dark">View More</button></NavLink>
+              </div>
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
     );
-};
+  };
+ 
+
 
 export default HomePageBanner;

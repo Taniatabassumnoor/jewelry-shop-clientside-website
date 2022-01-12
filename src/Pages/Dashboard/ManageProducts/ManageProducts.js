@@ -9,11 +9,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button, Container } from "@mui/material";
 
-const ManageProduct = () => {
+const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products")
+      .get(" https://shielded-caverns-45156.herokuapp.com/products")
       .then((res) => setProducts(res.data));
   }, []);
 
@@ -21,7 +21,7 @@ const ManageProduct = () => {
     const proceed = window.confirm("Are you sure, you want to delete?");
     if (proceed) {
       axios
-        .delete(`http://localhost:5000/products/${id}`)
+        .delete(` https://shielded-caverns-45156.herokuapp.com/products/${id}`)
         .then((res) => {
           if (res.data.deletedCount > 0) {
             alert("product deleted");
@@ -56,7 +56,7 @@ const ManageProduct = () => {
                 <TableCell align="center">
                   <img
                     style={{ width: 50, height: 50 }}
-                    src={product.cardImg}
+                    src={product.img}
                     alt=""
                   />
                 </TableCell>
@@ -81,4 +81,24 @@ const ManageProduct = () => {
   );
 };
 
-export default ManageProduct;
+export default ManageProducts;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
