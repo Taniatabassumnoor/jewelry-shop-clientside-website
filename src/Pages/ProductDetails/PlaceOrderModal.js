@@ -53,7 +53,7 @@ const PlaceOrderModal = ({
     data.orderInfo = orderInfo;
     data.status = "Pending";
     axios
-      .post("http://localhost:5000/orders", data)
+      .post("https://shielded-caverns-45156.herokuapp.com/orders", data)
       .then((res) => console.log(res.data))
       .finally(() => history.push("/dashboard/myOrders"));
     e.preventDefault();

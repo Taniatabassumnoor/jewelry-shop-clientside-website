@@ -19,14 +19,14 @@ const ManageAllOrder = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/allorders")
+    axios 
+      .get(`https://shielded-caverns-45156.herokuapp.com/allorders`)
       .then((res) => setAllOrders(res.data));
   }, [isReload]);
 
   const handleStatus = (data) => {
     data.status = "Shipped";
-    const url = `http://localhost:5000/orders/${data._id}`;
+    const url = `https://shielded-caverns-45156.herokuapp.com/orders/${data._id}`;
     axios
       .put(url, data)
       .then((res) => console.log("Updating order ", res.data))
@@ -37,7 +37,7 @@ const ManageAllOrder = () => {
     const proceed = window.confirm("Are you sure, you want to delete?");
     if (proceed) {
       axios
-        .delete(`http://localhost:5000/orders/${id}`)
+        .delete(`https://shielded-caverns-45156.herokuapp.com/orders/${id}`)
         .then((res) => {
           if (res.data.deletedCount > 0) {
             alert("product deleted");

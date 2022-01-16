@@ -73,7 +73,7 @@ const useFirebase = () => {
   useEffect(() => {
     if (user.email) {
       setIsLoading(true);
-      fetch(`http://localhost:5000/users/${user.email}`)
+      fetch(`https://shielded-caverns-45156.herokuapp.com/users/${user.email}`)
         .then((res) => res.json())
         .then((data) => setAdmin(data.admin))
         .finally(() => {
@@ -111,7 +111,7 @@ const useFirebase = () => {
   // save user 73----1
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("http://localhost:5000/users", {
+    fetch("https://shielded-caverns-45156.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",
