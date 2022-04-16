@@ -1,19 +1,15 @@
-import React from 'react';
-import './Headers.css'
-import {
-  Container,
-  Nav,
-  Navbar
-} from "react-bootstrap";
-import { NavLink } from 'react-router-dom';
-import useAuth from '../../../Hooks/useAuth';
+import React from "react";
+import "./Headers.css";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 const Headers = () => {
   const { user, logout } = useAuth();
   const navDesign = {
-    color: "red",
+    color: "#efcf4f",
   };
-    return (
-<Navbar fixed="top" bg="dark" expand="lg" className="nav">
+  return (
+    <Navbar fixed="top" bg="dark" expand="lg" className="nav">
       <Container fluid>
         <Navbar.Brand
           href="#"
@@ -32,27 +28,40 @@ const Headers = () => {
             <NavLink className="navStyle" activeStyle={navDesign} to="/home">
               Home
             </NavLink>
-            <NavLink
-              className="navStyle"
-              activeStyle={navDesign}
-              to="/explore"
-            >
+            <NavLink className="navStyle" activeStyle={navDesign} to="/explore">
               Explore Products
             </NavLink>
             <NavLink className="navStyle" activeStyle={navDesign} to="/about">
               About
             </NavLink>
-            {user.email && <NavLink className="navStyle" activeStyle={navDesign} to="/dashboard">
-              Dashboard
-            </NavLink>}
+            <NavLink className="navStyle" activeStyle={navDesign} to="/ourmap">
+              Our Branch
+            </NavLink>
+            <NavLink className="navStyle" activeStyle={navDesign} to="/gallery">
+              Our Gallery
+            </NavLink>
+            {user.email && (
+              <NavLink
+                className="navStyle"
+                activeStyle={navDesign}
+                to="/dashboard"
+              >
+                Dashboard
+              </NavLink>
+            )}
           </Nav>
           <Nav>
-          {user.displayName &&
-                <div>
-                  <img src={user?.image} alt="" />
-                  <button className="btn me-3  text-light p-2" style={{ height: '50px' }}>{user.displayName}</button>
-                </div>
-              }         
+            {user.displayName && (
+              <div>
+                <img src={user?.image} alt="" />
+                <button
+                  className="btn me-3  text-light p-2"
+                  style={{ height: "50px" }}
+                >
+                  {user.displayName}
+                </button>
+              </div>
+            )}
             {user.email ? (
               <button
                 onClick={logout}
@@ -71,7 +80,7 @@ const Headers = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    );
+  );
 };
 
 export default Headers;

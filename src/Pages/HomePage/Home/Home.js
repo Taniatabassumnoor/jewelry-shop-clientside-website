@@ -1,24 +1,27 @@
-import React from 'react';
+import React from "react";
+import Gallery from "../../Gallery/Gallery";
 
-import Footer from '../../Shared/Footer/Footer';
-import AllReviews from '../AllReviews/AllReviews';
+import Footer from "../../Shared/Footer/Footer";
+import WhyWeSpecial from "../../WhyWeSpecial/WhyWeSpecial";
+import AllReviews from "../AllReviews/AllReviews";
 
-import Category from '../Category/Category';
-import HomePageBanner from '../HomePageBanner/HomePageBanner';
+import Category from "../Category/Category";
+import HomePageBanner from "../HomePageBanner/HomePageBanner";
 
-
-import Services from '../Services/Services';
+import Services from "../Services/Services";
 
 const Home = () => {
-    return (
-        <div>
-             <HomePageBanner></HomePageBanner>
-             <Services></Services>
-             <Category></Category>
-             <AllReviews></AllReviews>
-      
-        </div>
-    );
+  return (
+    <div>
+      <HomePageBanner></HomePageBanner>
+      <Services></Services>
+
+      <WhyWeSpecial />
+      <Category></Category>
+      <Gallery />
+      <AllReviews></AllReviews>
+    </div>
+  );
 };
 
 export default Home;

@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import { Button, Container } from "@mui/material";
 import { Box } from "@mui/system";
 import useAuth from "../../../Hooks/useAuth";
-
+import { Link, NavLink } from "react-router-dom";
 
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -19,7 +19,9 @@ const MyOrder = () => {
 
   useEffect(() => {
     axios
-      .get(` https://shielded-caverns-45156.herokuapp.com/myorders?email=${user.email}`)
+      .get(
+        ` https://shielded-caverns-45156.herokuapp.com/myorders?email=${user.email}`
+      )
       .then((res) => setOrders(res.data));
   }, []);
   const reducer = (previousValue, currentValue) =>
@@ -54,6 +56,7 @@ const MyOrder = () => {
                 <TableCell align="center">Ordered By</TableCell>
                 <TableCell align="center">Status</TableCell>
                 <TableCell align="center">Action</TableCell>
+                <TableCell align="center">Payment</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -92,6 +95,8 @@ const MyOrder = () => {
                       {order.status}
                     </TableCell>
                   )}
+                  {/*  */}
+
                   <TableCell align="center">
                     {" "}
                     <Button
@@ -102,6 +107,31 @@ const MyOrder = () => {
                       {" "}
                       Cancel Order{" "}
                     </Button>{" "}
+                  </TableCell>
+
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                      color: "white",
+                      fontSize: 16,
+                    }}
+                    align="center"
+                  >
+                    {order.payment ? (
+                      "Paid"
+                    ) : (
+                      <Link
+                        to={`/dashboard/payment/${order._id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          sx={{ bgcolor: "error.main" }}
+                          variant="contained"
+                        >
+                          Unpaid
+                        </Button>
+                      </Link>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
@@ -124,27 +154,3 @@ const MyOrder = () => {
 };
 
 export default MyOrder;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
